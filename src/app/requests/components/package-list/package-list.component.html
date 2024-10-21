@@ -1,0 +1,10 @@
+<div class="container">
+  @if (package$ | async; as packages) { @for (package of packages; track package.id) {
+    <div class="package">
+      <div class="package__header">{{ package.id }}</div>
+      <span class="package__downloads">{{ package.weeklyDownloads | transformCount }}</span>
+      <span class="package__dependecies">{{ package.dependencyCount }} dependecies</span>
+    </div>
+    } }
+</div>
+

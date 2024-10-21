@@ -1,0 +1,43 @@
+.container {
+  width: 500px;
+  height: 400px;
+  padding: 10px;
+  border: 1px solid black;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  overflow: scroll;
+}
+
+.package {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+
+  margin-top: 2rem;
+
+  width: 12vw;
+  border: 2px solid black;
+
+  &:hover {
+    .package__header {
+      background-color: rgb(203, 248, 248);
+    }
+  }
+
+  &__header {
+    border-bottom: 2px solid black;
+    font-size: 1rem;
+    font-weight: 600;
+    padding: 5px;
+  }
+
+  &__downloads {
+    margin-left: 5px;
+  }
+
+  &__dependecies {
+    margin-left: 5px;
+    margin-bottom: 5px;
+  }
+}
