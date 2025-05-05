@@ -1,11 +1,11 @@
 <div class="wrapper">
   <div class="wrapper__search">
-    <input type="text" [(ngModel)]="findPackage" (input)="filterPackages()" />
+    <input type="text" (input)="onFilterChange($event)" placeholder="Поиск пакета" />
       <button (click)="getPackagesOnClick()">Повторить запрос</button>
   </div>
   
   <div class="container">
-    @if (package$ | async; as packages) { @for (package of packages; track package.id) {
+    @if (filteredPackages$ | async; as packages) { @for (package of packages; track package.id) {
       <div class="package" 
           (mouseenter)="onMouseEnter(package)"
           (mouseleave)="onMouseLeave()">

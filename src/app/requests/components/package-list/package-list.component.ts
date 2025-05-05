@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, combineLatest, map, Observable } from 'rxjs';
 import { Package, PackageService } from '../../services/package.service';
 
 @Component({
@@ -13,13 +13,25 @@ export class PackageListComponent {
   public hoveredPackageId: string | undefined = undefined;
   public packageDependency: String[] = [];
 
-  public findPackage = '';
+
+  public filteredPackages$?: Observable<Package[]>;
+  private filterSubject = new BehaviorSubject<string>('');
 
 
   constructor(private packageService: PackageService) { }
 
   public ngOnInit(): void {
     this.package$ = this.packageService.getPackage();
+
+    this.filteredPackages$ = combineLatest([this.package$, this.filterSubject]).pipe(
+      map(([packages, filter]) => {
+        if (!filter.trim()) {
+          return packages;
+        }
+        const lowerFilter = filter.toLowerCase();
+        return packages.filter(pkg => pkg.id.toLowerCase().includes(lowerFilter));
+      })
+    );
   }
 
   public onMouseEnter(pkg: Package) {
@@ -38,9 +50,9 @@ export class PackageListComponent {
     this.package$ = this.packageService.getPackage();
   }
 
-  public filterPackages () {
-    
-
+  public onFilterChange(event: Event): void {
+    const value = (event.target as HTMLInputElement).value;
+      this.filterSubject.next(value);
     
   }
 
