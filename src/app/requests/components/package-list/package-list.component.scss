@@ -1,6 +1,18 @@
+.wrapper {
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 100px;
+  
+  &__search {
+      
+  }
+}
+
 .container {
   width: 500px;
-  height: 400px;
+  height: 500px;
   padding: 10px;
   border: 1px solid black;
   display: flex;
@@ -40,4 +52,8 @@
     margin-left: 5px;
     margin-bottom: 5px;
   }
+}
+
+.dependency-highlight {
+  background-color: rgb(238, 171, 145);
 }
